@@ -3,7 +3,6 @@ import {
   Connection,
   Keypair,
   LAMPORTS_PER_SOL,
-  sendAndConfirmRawTransaction,
   sendAndConfirmTransaction,
   SystemProgram,
   Transaction,
