@@ -47,13 +47,12 @@ tx.add(ix);
     ).blockhash;
     transaction.feePayer = keypair.publicKey;
 
-    // Sign transaction, broadcast, and confirm
     const signature = await sendAndConfirmTransaction(conn, transaction, [
       keypair,
     ]);
-    console.log(`Success! Check out your TX here: 
+    console.log(` 
       https://explorer.solana.com/tx/${signature}?cluster=devnet`);
   } catch (e) {
-    console.error(`Oops, something went wrong: ${e}`);
+    console.error(`something went wrong: ${e}`);
   }
 })();
