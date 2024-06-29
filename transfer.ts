@@ -3,21 +3,29 @@ import {
   Connection,
   Keypair,
   LAMPORTS_PER_SOL,
+  PublicKey,
   sendAndConfirmTransaction,
   SystemProgram,
   Transaction,
 } from "@solana/web3.js";
+import "dotenv/config";
 import wallet from "./dev-wallet.json";
 
 const keypair = Keypair.fromSecretKey(new Uint8Array(wallet));
 
-const keypair2 = Keypair.generate();
+const toString = process.env.SECOND_WALLET_PUBKEY;
+
+if (!toString) {
+  throw new Error("Failed to get PUBKEY from environment");
+}
+
+const to = new PublicKey(toString);
 
 const conn = new Connection(clusterApiUrl("devnet"), "confirmed");
 
 const ix = SystemProgram.transfer({
   fromPubkey: keypair.publicKey,
-  toPubkey: keypair2.publicKey,
+  toPubkey: to,
   lamports: 0.1 * LAMPORTS_PER_SOL,
 });
 
