@@ -35,11 +35,25 @@ tx.add(ix);
 
 (async () => {
   try {
-    const txhash = await sendAndConfirmTransaction(conn, tx, [keypair]);
+    const transaction = new Transaction().add(
+      SystemProgram.transfer({
+        fromPubkey: keypair.publicKey,
+        toPubkey: to,
+        lamports: LAMPORTS_PER_SOL / 100,
+      })
+    );
+    transaction.recentBlockhash = (
+      await conn.getLatestBlockhash("confirmed")
+    ).blockhash;
+    transaction.feePayer = keypair.publicKey;
 
-    console.log(`
-          https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
+    // Sign transaction, broadcast, and confirm
+    const signature = await sendAndConfirmTransaction(conn, transaction, [
+      keypair,
+    ]);
+    console.log(`Success! Check out your TX here: 
+      https://explorer.solana.com/tx/${signature}?cluster=devnet`);
   } catch (e) {
-    console.error(`something went wrong: ${e}`);
+    console.error(`Oops, something went wrong: ${e}`);
   }
 })();
