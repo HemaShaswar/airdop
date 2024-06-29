@@ -35,12 +35,11 @@ tx.add(ix);
 
 (async () => {
   try {
-    // We're going to claim 2 devnet SOL tokens
     const txhash = await sendAndConfirmTransaction(conn, tx, [keypair]);
 
     console.log(`
           https://explorer.solana.com/tx/${txhash}?cluster=devnet`);
   } catch (e) {
-    console.error(`Oops, something went wrong: ${e}`);
+    console.error(`something went wrong: ${e}`);
   }
 })();
