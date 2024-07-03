@@ -3,3 +3,6 @@
 
 *.env
 dev-wallet.json
+
+*.env
+dev-wallet.json
