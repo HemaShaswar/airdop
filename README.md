@@ -9,7 +9,7 @@ NOTE: You need to save the keypair in "./dev-wallet.json" file
 airdrop.ts requests 2 sol airdrop
     yarn airdrop
 
-Transfers 0.1 sol from de-wallet.json to the SECOND_WALLET in .env file
+Transfers 0.1 sol from dev-wallet.json to the SECOND_WALLET in .env file
     yarn transfer
 
 Interacts with the WBA Prereq program with my github name HemaShaswar as a seed
